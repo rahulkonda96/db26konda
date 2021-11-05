@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to the icecream store
+   div(class="container-fluid")
+        div(class="row")
+            -
+                let icecream = [
+                    {
+                        "Flavour": "Vanilla",
+                        "liters": 4,
+                        "price": 20
+                    },
+                    {
+                        "Flavour": "Strawberry",
+                        "liters": 10,
+                        "price": 30
+                    },
+                    {
+                        "Flavour": "Chocolate",
+                        "liters": 25,
+                        "price": 45
+                    },                   
+                ]
+            each v,index in icecream
+                table(style='width:100%', border='1')
+                  tr 
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.Flavour}
+                    br
+                    br
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.liters}
+                    br
+                    br
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.price}
+   script.                
+         function buy(intemNo)
+         {
+               alert(`you purchased icecream ${intemNo + 1}`)
+         }
