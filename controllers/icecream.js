@@ -16,7 +16,7 @@ exports.icecream_list = async function(req, res) {
 exports.icecream_detail = async function(req, res) {
     console.log("detail" + req.params.id)
     try {
-    result = await Icecream.findById( req.params.id)
+    result = await icecream.findById( req.params.id)
     res.send(result)
     } catch (error) {
     res.status(500)
@@ -32,9 +32,9 @@ exports.icecream_create_post = async function(req, res) {
     // Even though bodies can be in many different formats, we will be picky 
     // and require that it be a json object 
     // {"costume_type":"goat", "cost":12, "size":"large"} 
-    document.icecream_Name = req.body.icecream_Name; 
-    document.litre = req.body.litre; 
-    document.cost = req.body.cost; 
+    document.icecream_Flavour = req.body.icecream_Flavour; 
+    document.liters = req.body.liters; 
+    document.price = req.body.price; 
     try{ 
         let result = await document.save(); 
         res.send(result); 
@@ -50,9 +50,25 @@ exports.icecream_delete = function(req, res) {
     res.send('NOT IMPLEMENTED: icecream delete DELETE ' + req.params.id); 
 }; 
  
-// Handle icecream update form on PUT. 
-exports.icecream_update_put = function(req, res) { 
-    res.send('NOT IMPLEMENTED: icecream update PUT' + req.params.id); 
+// Handle Icecream update form on PUT.
+exports.icecream_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await icecream.findById( req.params.id)
+// Do updates of properties
+if(req.body.costume_Flavour)
+toUpdate.icecream_Flavour = req.body.icecream_Flavour;
+if(req.body.litres) toUpdate.cost = req.body.litres;
+if(req.body.price) toUpdate.price = req.body.price;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
 }; 
 // VIEWS 
 // Handle a show all view 
