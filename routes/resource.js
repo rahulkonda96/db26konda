@@ -9,7 +9,7 @@ var icecream_controller = require('../controllers/icecream');
  
 // GET resources base. 
 router.get('/', api_controller.api); 
- 
+router.get('/', icecream_controller.icecream_view_all_Page ); 
 /// COSTUME ROUTES /// 
  
 // POST request for creating a icecream.  
