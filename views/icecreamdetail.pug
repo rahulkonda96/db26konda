@@ -1,0 +1,45 @@
+extends layout 
+ 
+block content 
+  h1= title 
+   if (toShow == null)
+    h2 No instance to show Costume Detail 
+   else 
+ 
+  - let icecreamid = toShow._id 
+  - let icecream_Flavour = toShow.Flavour
+  - let icecreamliters = toShow.liters 
+  - let icecreamprice = toShow.price 
+  div 
+    div.row 
+      div(class='icecreamAttr mr-3') icecream ID is: 
+      div #{icecreamid} 
+    div.row 
+      div(class='icecreamAttr mr-3') icecream Flavour s: 
+      div #{icecream_Flavour} 
+    div.row 
+      div(class='icecreamAttr mr-3') icecream liters is: 
+      div #{icecreamliters} 
+    div.row 
+      div(class='icecreamAttr mr-3') icecream price is: 
+      div #{icecreamprice} 
+
+
+    button(class="btn btn-danger m-2" onclick="gobackOnid()") goback 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+
+  script. 
+    function cancel() { 
+      // Go back to the home page for the watch collection 
+      window.location.href='/icecream'
+    }
+
+  script. 
+   function gobackOnid() { 
+     window.location.href='/icecream'
+   }
+
+
+
+  
