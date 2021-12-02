@@ -2,10 +2,12 @@ extends layout
 
 block content
   h1= title
-   - let pin  = results 
+    - let createView = `dispatch(\"icecream/create\")`
+  button.btn(class="btn-primary m1-2", onclick=createView) Create
+    - let results = theicecream
   p Welcome to the icecream store
    div(class="container-fluid")
-        div(class="row")
+        div(class="row m-1")
             -
                 let icecream = [
                     {
@@ -25,6 +27,7 @@ block content
                     },                   
                 ]
             each v,index in icecream
+             - let destination = `dispatch(\"/icecream/update?id=${v._id}\")` 
                 table(style='width:100%', border='1')
                   tr 
                     div(class="col-sm-2" onclick=`buy(${index})`) #{v.Flavour}
@@ -34,8 +37,13 @@ block content
                     br
                     br
                     div(class="col-sm-2" onclick=`buy(${index})`) #{v.price}
-   script.                
-         function buy(intemNo)
-         {
-               alert(`you purchased icecream ${intemNo + 1}`)
-         }
+
+                button.btn( class="btn-primary ml-1", onclick= destination) Update 
+                button.btn(class="btn-primary ml-2", onclick= detailView) Detail
+                button.btn(class="btn-danger ml-2", onclick= deleteView) Delete
+   
+   
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    } 

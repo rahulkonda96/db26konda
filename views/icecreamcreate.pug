@@ -13,8 +13,12 @@ block content
     div.form-group 
         label.icecreamAttr(for='price') icecream price 
         input#price(type='number', name='price') 
-    input(type="submit") 
- 
+    div.form-group 
+        label.icecreamAttr(for='quantity') icecream quantity 
+        input#size(type='number', name='quantity',value=quantity  min=2, max=5)
+    
+    input(type="submit")
+
   script. 
     document.forms['icecreamForm'].addEventListener('submit', (event) => { 
       event.preventDefault(); 
